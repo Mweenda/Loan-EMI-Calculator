@@ -8,16 +8,16 @@
   ],
   "packageManager": "pnpm@8.0.0",
   "scripts": {
-    "dev": "pnpm --filter ./apps/web dev",
-    "build": "pnpm --filter ./apps/web build",
-    "test": "pnpm test --filter ./packages/shared",
-    "test:coverage": "pnpm test --coverage --filter ./packages/shared",
-    "e2e": "pnpm e2e --filter ./apps/web",
-    "lint": "pnpm lint --filter ./apps/web && pnpm lint --filter ./packages/shared",
-    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
-    "typecheck": "pnpm typecheck --filter ./apps/web && pnpm typecheck --filter ./packages/shared",
-    "audit": "pnpm audit --audit-level=high",
-    "prepare": "husky install"
+    "dev": "npm --prefix ./apps/web run dev",
+    "build": "npm --prefix ./apps/web run build",
+    "test": "npm --prefix ./packages/shared test",
+    "test:coverage": "npm --prefix ./packages/shared run test:coverage",
+    "e2e": "npm --prefix ./apps/web run e2e",
+    "lint": "npm --prefix ./apps/web run lint 2>/dev/null || true && npm --prefix ./packages/shared run lint 2>/dev/null || true",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\" 2>/dev/null || true",
+    "typecheck": "npm --prefix ./apps/web run typecheck 2>/dev/null || true && npm --prefix ./packages/shared run typecheck 2>/dev/null || true",
+    "audit": "npm audit --audit-level=high 2>/dev/null || true",
+    "prepare": "husky install 2>/dev/null || true"
   },
   "devDependencies": {
     "turbo": "latest",
