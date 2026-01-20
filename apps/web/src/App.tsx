@@ -3,6 +3,7 @@ import { calculateEMI, loanInputSchema } from '@lemic/shared';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { LoanInput } from '@lemic/shared';
+import { DEFAULT_LOAN_VALUES, CURRENCY_SYMBOL, DECIMAL_PLACES } from './config';
 import './App.css';
 
 function App() {
@@ -17,11 +18,7 @@ function App() {
     watch,
   } = useForm<LoanInput>({
     resolver: zodResolver(loanInputSchema),
-    defaultValues: {
-      principal: 100000,
-      annualRate: 10,
-      months: 12,
-    },
+    defaultValues: DEFAULT_LOAN_VALUES,
   });
 
   const formValues = watch();
@@ -47,7 +44,7 @@ function App() {
 
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <div className="form-group">
-            <label htmlFor="principal">Principal Amount (₹)</label>
+            <label htmlFor="principal">Principal Amount ({CURRENCY_SYMBOL})</label>
             <input
               id="principal"
               type="number"
@@ -105,18 +102,18 @@ function App() {
             <h2>Calculation Results</h2>
             <div className="result-item">
               <span>Monthly EMI:</span>
-              <span className="result-value">₹{emiResult.toFixed(2)}</span>
+              <span className="result-value">{CURRENCY_SYMBOL}{emiResult.toFixed(DECIMAL_PLACES)}</span>
             </div>
             <div className="result-item">
               <span>Total Amount to Pay:</span>
               <span className="result-value">
-                ₹{totalAmount?.toFixed(2)}
+                {CURRENCY_SYMBOL}{totalAmount?.toFixed(DECIMAL_PLACES)}
               </span>
             </div>
             <div className="result-item">
               <span>Total Interest:</span>
               <span className="result-value">
-                ₹{totalInterest?.toFixed(2)}
+                {CURRENCY_SYMBOL}{totalInterest?.toFixed(DECIMAL_PLACES)}
               </span>
             </div>
           </div>
