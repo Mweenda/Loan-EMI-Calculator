@@ -2,6 +2,8 @@
 
 A professional-grade **monorepo** for calculating loan EMI (Equated Monthly Installment) with strict type safety, automated testing, and production-level quality gates.
 
+> 🎯 **Welcome to the Project!** Start with the [Engineering Onboarding Guide](./ENGINEERING_ONBOARDING.md) for a complete walkthrough.
+
 ---
 
 ## Table of Contents
