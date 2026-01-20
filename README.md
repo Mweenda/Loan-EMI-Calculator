@@ -2,7 +2,69 @@
 
 A professional-grade **monorepo** for calculating loan EMI (Equated Monthly Installment) with strict type safety, automated testing, and production-level quality gates.
 
-> 🎯 **Welcome to the Project!** Start with the [Engineering Onboarding Guide](./ENGINEERING_ONBOARDING.md) for a complete walkthrough.
+> 🎯 **Welcome to the Project!** Start with the [Engineering Onboarding Guide](./docs/ENGINEERING_ONBOARDING.md) for a complete walkthrough.
+
+---
+
+## 📚 Documentation Index
+
+| Document | Purpose | Audience |
+| --- | --- | --- |
+| **[Engineering Onboarding](./docs/ENGINEERING_ONBOARDING.md)** | Complete developer guide with quick start | All engineers |
+| **[Contributing Guidelines](./docs/CONTRIBUTING.md)** | Contribution rules and PR process | Contributors |
+| **[Development Workflow](./docs/DEVELOPMENT_WORKFLOW.md)** | Phase-by-phase project workflow | Team leads |
+| **[Technical Design Document](./docs/TECHNICAL_DESIGN_DOCUMENT.md)** | Architecture and design decisions | Architects |
+| **[Project Status](./docs/PROJECT_STATUS.md)** | Current project health and status | Project managers |
+| **[Verification Checklist](./docs/VERIFICATION_CHECKLIST.md)** | Launch confirmation checklist | QA/Leads |
+| **[Delivery Summary](./docs/PROJECT_DELIVERY_SUMMARY.md)** | Executive project summary | Stakeholders |
+| **[Implementation Guide](./docs/IMPLEMENTATION_COMPLETE.md)** | Delivery checklist | All |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js v18+ (LTS recommended)
+- PNPM 8.0.0+ ([Install Guide](https://pnpm.io/installation))
+
+### Setup (< 2 minutes)
+
+```bash
+# Clone and navigate
+git clone https://github.com/Mweenda/Loan-EMI-Calculator.git
+cd Loan-EMI-Calculator
+
+# Switch to develop branch
+git checkout develop
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+```
+
+The calculator will be available at `http://localhost:5173`.
+
+---
+
+## 📖 Documentation Map
+
+### For Getting Started
+1. Read this README (you are here)
+2. Read [Engineering Onboarding](./docs/ENGINEERING_ONBOARDING.md)
+3. Run `pnpm dev` to see it working
+
+### For Development
+1. Check [Development Workflow](./docs/DEVELOPMENT_WORKFLOW.md) for current phase
+2. Review [Contributing Guidelines](./docs/CONTRIBUTING.md) before PRs
+3. Reference [Technical Design](./docs/TECHNICAL_DESIGN_DOCUMENT.md) for architecture
+
+### For Project Tracking
+1. Monitor [Project Status](./docs/PROJECT_STATUS.md)
+2. Use [Verification Checklist](./docs/VERIFICATION_CHECKLIST.md) for milestones
+3. Review [Delivery Summary](./docs/PROJECT_DELIVERY_SUMMARY.md) for overview
 
 ---
 
@@ -14,6 +76,7 @@ A professional-grade **monorepo** for calculating loan EMI (Equated Monthly Inst
 - [Testing & Quality](#testing--quality)
 - [Security & Compliance](#security--compliance)
 - [Deployment](#deployment)
+- [Common Commands](#common-commands)
 - [Contributing](#contributing)
 
 ---
