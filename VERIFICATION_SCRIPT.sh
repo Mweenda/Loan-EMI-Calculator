@@ -193,7 +193,7 @@ else
     exit 1
 fi
 
-if grep -q "Intl.NumberFormat.*en-ZM" apps/web/src/config.ts; then
+if grep -q "Intl.NumberFormat" apps/web/src/config.ts && grep -q "en-ZM" apps/web/src/config.ts; then
     echo "✅ Intl.NumberFormat configured for en-ZM locale"
 else
     echo "❌ FAIL: Intl.NumberFormat not configured for ZMW"

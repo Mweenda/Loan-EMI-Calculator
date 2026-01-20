@@ -4,7 +4,7 @@
  */
 
 export const DEFAULT_LOAN_VALUES = {
-  principal: 100000,      // Default: K100,000 (ZMW)
+  principal: 10000,       // Default: K10,000 (ZMW) - typical SME loan
   annualRate: 20,         // Default: 20% per annum (typical Zambian market rate)
   months: 12,             // Default: 12 months
 } as const;
