@@ -12,27 +12,81 @@
 3. Run `pnpm install && pnpm dev` - Get it running
 4. Make your first commit - Verify pre-commit hooks
 
-### 💻 I'm Starting Development
-1. Check [DEVELOPMENT_WORKFLOW.md](./DEVELOPMENT_WORKFLOW.md) - What phase are we in?
-2. Read [CONTRIBUTING.md](./CONTRIBUTING.md) - How to contribute
-3. Review relevant section in [TECHNICAL_DESIGN_DOCUMENT.md](./TECHNICAL_DESIGN_DOCUMENT.md)
-4. Create feature branch and start coding
+### 💻 I'm Starting Phase 1 Development
+1. Read [MVP_ROADMAP.md](./MVP_ROADMAP.md) - Understand features & acceptance criteria
+2. Review [SUCCESS_METRICS.md](./SUCCESS_METRICS.md) - Know what success looks like
+3. Check [DEVELOPMENT_WORKFLOW.md](./DEVELOPMENT_WORKFLOW.md) - What phase are we in?
+4. Read [CONTRIBUTING.md](./CONTRIBUTING.md) - How to contribute
+5. Create feature branch and start coding
 
-### 🔍 I'm Reviewing Code
-1. Check [CONTRIBUTING.md](./CONTRIBUTING.md) - Code review checklist
-2. Reference [TECHNICAL_DESIGN_DOCUMENT.md](./TECHNICAL_DESIGN_DOCUMENT.md) - Architecture standards
-3. Verify tests pass and coverage ≥80%
-4. Leave constructive feedback
+### 🔍 I'm Reviewing Phase 1 Code
+1. Use [CODE_REVIEW_FRAMEWORK.md](./CODE_REVIEW_FRAMEWORK.md) - Complete review checklist
+2. Check [SUCCESS_METRICS.md](./SUCCESS_METRICS.md) - Verify metrics pass
+3. Reference [TECHNICAL_DESIGN_DOCUMENT.md](./TECHNICAL_DESIGN_DOCUMENT.md) - Architecture standards
+4. Verify tests pass and coverage ≥80%
+5. Leave constructive feedback with ADR validation
 
-### 📊 I'm Tracking Progress
-1. Check [PROJECT_STATUS.md](./PROJECT_STATUS.md) - Current status
-2. Review [VERIFICATION_CHECKLIST.md](./VERIFICATION_CHECKLIST.md) - Milestone checklist
-3. Read [DEVELOPMENT_WORKFLOW.md](./DEVELOPMENT_WORKFLOW.md) - Phase details
-4. Check [PROJECT_DELIVERY_SUMMARY.md](./PROJECT_DELIVERY_SUMMARY.md) - Executive summary
+### 📊 I'm Tracking Phase 1 Progress
+1. Review [MVP_ROADMAP.md](./MVP_ROADMAP.md) - Feature status & acceptance criteria
+2. Check [SUCCESS_METRICS.md](./SUCCESS_METRICS.md) - KPIs and metrics dashboard
+3. Read [PROJECT_STATUS.md](./PROJECT_STATUS.md) - Current status
+4. Review [VERIFICATION_CHECKLIST.md](./VERIFICATION_CHECKLIST.md) - Milestone checklist
 
 ---
 
 ## 📄 Document Overview
+
+### MVP_ROADMAP.md (NEW)
+**Strategic MVP Development Roadmap**
+
+- 4-phase development breakdown
+- Feature-by-feature acceptance criteria
+- Phase 1: Core calculation engine
+- Phase 2: Professional UI & interaction
+- Phase 3: Persistence & API layer
+- Phase 4: Reliability & QA
+- Team authorization and accountability
+- Estimated timeline and deadlines
+
+**Read if**: You're developing Phase 1 or planning next phases  
+**Time to read**: 20-25 minutes  
+**Use case**: Feature planning, acceptance criteria, implementation guide
+
+---
+
+### SUCCESS_METRICS.md (NEW)
+**Success Metrics & KPI Framework**
+
+- Tier 1: Code quality metrics (coverage, types, linting)
+- Tier 2: Team performance metrics (review time, standups)
+- Tier 3: Business metrics (delivery, regressions, accessibility)
+- Daily standup report template
+- Accountability checkpoints for each phase
+- Escalation matrix and metric dashboard
+- Performance benchmarks
+
+**Read if**: You need to track progress or understand success criteria  
+**Time to read**: 15-20 minutes  
+**Use case**: Metrics tracking, daily standups, accountability checkpoints
+
+---
+
+### CODE_REVIEW_FRAMEWORK.md (NEW)
+**Code Review Framework & ADR Template**
+
+- Phase 1 code review checklist
+- Feature-specific review guidelines
+- Pull request submission template
+- Architecture Decision Record (ADR) template
+- Review approval rules and SLA
+- Common review comments and best practices
+- Review metrics and learning log
+
+**Read if**: You're submitting a PR or reviewing code  
+**Time to read**: 15-20 minutes  
+**Use case**: PR submissions, code reviews, ADR documentation
+
+---
 
 ### ENGINEERING_ONBOARDING.md
 **The Developer's Bible**
@@ -179,35 +233,49 @@
 
 ## 🔗 Reading Order by Role
 
-### For Junior Developers
+### For Junior Developers (Phase 1 Contributors)
 1. README.md (5 min)
 2. ENGINEERING_ONBOARDING.md (45 min)
-3. CONTRIBUTING.md (15 min)
-4. DEVELOPMENT_WORKFLOW.md - Your current phase (20 min)
+3. MVP_ROADMAP.md - Phase 1 section (15 min)
+4. CODE_REVIEW_FRAMEWORK.md - PR submission template (10 min)
+5. CONTRIBUTING.md (15 min)
+6. SUCCESS_METRICS.md - Understanding metrics (10 min)
 
-**Total**: ~1.5 hours to get fully onboarded
+**Total**: ~2 hours to be ready for Phase 1 implementation
 
-### For Senior Developers
-1. TECHNICAL_DESIGN_DOCUMENT.md (25 min)
-2. PROJECT_STATUS.md (15 min)
-3. DEVELOPMENT_WORKFLOW.md (20 min)
-4. CONTRIBUTING.md - Code review section (10 min)
+### For Senior Developers (Reviewers)
+1. MVP_ROADMAP.md - Phase 1 features & AC (15 min)
+2. CODE_REVIEW_FRAMEWORK.md (20 min)
+3. TECHNICAL_DESIGN_DOCUMENT.md (25 min)
+4. SUCCESS_METRICS.md - Code quality metrics (10 min)
+5. PROJECT_STATUS.md (15 min)
 
-**Total**: ~1 hour to understand project depth
+**Total**: ~1.5 hours to understand review responsibilities
+
+### For Tech Leads (Phase Managers)
+1. MVP_ROADMAP.md (20 min)
+2. SUCCESS_METRICS.md (20 min)
+3. DEVELOPMENT_WORKFLOW.md (25 min)
+4. CODE_REVIEW_FRAMEWORK.md - Approval rules (10 min)
+5. VERIFICATION_CHECKLIST.md (10 min)
+
+**Total**: ~1.5 hours to manage Phase 1
 
 ### For Team Leads
 1. PROJECT_STATUS.md (15 min)
-2. DEVELOPMENT_WORKFLOW.md (25 min)
-3. VERIFICATION_CHECKLIST.md (10 min)
-4. CONTRIBUTING.md (15 min)
+2. MVP_ROADMAP.md - Phase overview (15 min)
+3. SUCCESS_METRICS.md - Team performance metrics (10 min)
+4. DEVELOPMENT_WORKFLOW.md (25 min)
+5. VERIFICATION_CHECKLIST.md (10 min)
 
-**Total**: ~1 hour to manage the team
+**Total**: ~1.5 hours to manage the team
 
 ### For Project Managers
 1. PROJECT_DELIVERY_SUMMARY.md (15 min)
-2. PROJECT_STATUS.md (15 min)
-3. DEVELOPMENT_WORKFLOW.md - Phases section (15 min)
-4. VERIFICATION_CHECKLIST.md (10 min)
+2. MVP_ROADMAP.md - Roadmap & deadlines (15 min)
+3. SUCCESS_METRICS.md - Business metrics (10 min)
+4. PROJECT_STATUS.md (15 min)
+5. VERIFICATION_CHECKLIST.md (10 min)
 
 **Total**: ~1 hour for status updates
 
@@ -215,17 +283,38 @@
 
 ## 📋 Common Questions & Answers
 
-### "How do I get started?"
-→ Read [README.md](../README.md) and [ENGINEERING_ONBOARDING.md](./ENGINEERING_ONBOARDING.md)
+### "How do I start Phase 1?"
+→ Read [MVP_ROADMAP.md](./MVP_ROADMAP.md) Features 1.1-1.3, then [CODE_REVIEW_FRAMEWORK.md](./CODE_REVIEW_FRAMEWORK.md)
+
+### "What are the acceptance criteria?"
+→ See detailed AC in [MVP_ROADMAP.md](./MVP_ROADMAP.md) - Phase 1 section
+
+### "How do I know if I'm succeeding?"
+→ Check [SUCCESS_METRICS.md](./SUCCESS_METRICS.md) - Your metrics dashboard
+
+### "What metrics do I need to track?"
+→ [SUCCESS_METRICS.md](./SUCCESS_METRICS.md) - All KPIs and thresholds
+
+### "How do I submit a PR for Phase 1?"
+→ Follow [CODE_REVIEW_FRAMEWORK.md](./CODE_REVIEW_FRAMEWORK.md) - PR submission template
+
+### "What should I include with my PR?"
+→ [CODE_REVIEW_FRAMEWORK.md](./CODE_REVIEW_FRAMEWORK.md) - Code + Tests + ADR
+
+### "What's an ADR and why do I need one?"
+→ [CODE_REVIEW_FRAMEWORK.md](./CODE_REVIEW_FRAMEWORK.md) - ADR template with examples
+
+### "How will my code be reviewed?"
+→ [CODE_REVIEW_FRAMEWORK.md](./CODE_REVIEW_FRAMEWORK.md) - Feature-specific checklists
 
 ### "What should I work on next?"
-→ Check [DEVELOPMENT_WORKFLOW.md](./DEVELOPMENT_WORKFLOW.md) for current phase
-
-### "How do I submit a PR?"
-→ Follow [CONTRIBUTING.md](./CONTRIBUTING.md) step-by-step
+→ Check [MVP_ROADMAP.md](./MVP_ROADMAP.md) for current phase
 
 ### "Where's the architecture documented?"
 → See [TECHNICAL_DESIGN_DOCUMENT.md](./TECHNICAL_DESIGN_DOCUMENT.md)
+
+### "Why did we choose this architecture?"
+→ Read [TECHNICAL_DESIGN_DOCUMENT.md](./TECHNICAL_DESIGN_DOCUMENT.md) section 3
 
 ### "What's the project status?"
 → Check [PROJECT_STATUS.md](./PROJECT_STATUS.md)
@@ -233,17 +322,8 @@
 ### "Is the project ready to launch?"
 → See [VERIFICATION_CHECKLIST.md](./VERIFICATION_CHECKLIST.md)
 
-### "Why did we choose this architecture?"
-→ Read [TECHNICAL_DESIGN_DOCUMENT.md](./TECHNICAL_DESIGN_DOCUMENT.md) section 3
-
 ### "How do I review someone's code?"
-→ Use checklist in [CONTRIBUTING.md](./CONTRIBUTING.md)
-
-### "What are the success criteria?"
-→ See [PROJECT_DELIVERY_SUMMARY.md](./PROJECT_DELIVERY_SUMMARY.md) or [PROJECT_STATUS.md](./PROJECT_STATUS.md)
-
-### "What commands should I use?"
-→ See Common Commands in [ENGINEERING_ONBOARDING.md](./ENGINEERING_ONBOARDING.md)
+→ Use [CODE_REVIEW_FRAMEWORK.md](./CODE_REVIEW_FRAMEWORK.md) - Complete review checklist
 
 ---
 
@@ -300,6 +380,9 @@
 
 | Document | Lines | Topics | Read Time |
 | --- | --- | --- | --- |
+| MVP_ROADMAP.md | 450+ | 18+ | 25 min |
+| SUCCESS_METRICS.md | 420+ | 15+ | 20 min |
+| CODE_REVIEW_FRAMEWORK.md | 380+ | 14+ | 20 min |
 | ENGINEERING_ONBOARDING.md | 500+ | 20+ | 45 min |
 | CONTRIBUTING.md | 412+ | 15+ | 20 min |
 | DEVELOPMENT_WORKFLOW.md | 399+ | 12+ | 25 min |
@@ -309,7 +392,7 @@
 | PROJECT_DELIVERY_SUMMARY.md | 456+ | 12+ | 20 min |
 | IMPLEMENTATION_COMPLETE.md | 273+ | 10+ | 15 min |
 
-**Total Documentation**: ~3,200+ lines covering 100+ topics
+**Total Documentation**: ~4,800+ lines covering 150+ topics
 
 ---
 
