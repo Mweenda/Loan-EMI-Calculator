@@ -3,7 +3,7 @@ import { calculateEMI, loanInputSchema } from '@lemic/shared';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { LoanInput } from '@lemic/shared';
-import { DEFAULT_LOAN_VALUES, CURRENCY_SYMBOL, DECIMAL_PLACES } from './config';
+import { DEFAULT_LOAN_VALUES, CURRENCY_SYMBOL, DECIMAL_PLACES, formatCurrency } from './config';
 import './App.css';
 
 function App() {
@@ -99,21 +99,21 @@ function App() {
 
         {emiResult !== null && (
           <div className="results">
-            <h2>Calculation Results</h2>
+            <h2>Calculation Results (ZMW)</h2>
             <div className="result-item">
               <span>Monthly EMI:</span>
-              <span className="result-value">{CURRENCY_SYMBOL}{emiResult.toFixed(DECIMAL_PLACES)}</span>
+              <span className="result-value">{formatCurrency(emiResult)}</span>
             </div>
             <div className="result-item">
               <span>Total Amount to Pay:</span>
               <span className="result-value">
-                {CURRENCY_SYMBOL}{totalAmount?.toFixed(DECIMAL_PLACES)}
+                {formatCurrency(totalAmount || 0)}
               </span>
             </div>
             <div className="result-item">
               <span>Total Interest:</span>
               <span className="result-value">
-                {CURRENCY_SYMBOL}{totalInterest?.toFixed(DECIMAL_PLACES)}
+                {formatCurrency(totalInterest || 0)}
               </span>
             </div>
           </div>

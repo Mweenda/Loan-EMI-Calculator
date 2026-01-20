@@ -4,9 +4,24 @@ import { z } from "zod";
 // SCHEMA: Zod Runtime Validation
 // ============================================================================
 export const loanInputSchema = z.object({
-  principal: z.number().positive("Principal must be greater than 0"), // Loan amount in currency units
-  annualRate: z.number().positive("Annual rate must be greater than 0"), // Annual interest rate (percent)
-  months: z.number().int().positive("Months must be a positive integer"), // Loan tenure in months
+  principal: z
+    .coerce
+    .number()
+    .min(1, "Principal must be greater than or equal to 1")
+    .max(10000000, "Principal must be less than or equal to 10,000,000"),
+  
+  annualRate: z
+    .coerce
+    .number()
+    .min(0.1, "Annual rate must be greater than or equal to 0.1")
+    .max(100, "Annual rate must be less than or equal to 100"),
+  
+  months: z
+    .coerce
+    .number()
+    .int("Months must be a whole number")
+    .min(1, "Months must be greater than or equal to 1")
+    .max(360, "Months must be less than or equal to 360"),
 });
 
 export type LoanInput = z.infer<typeof loanInputSchema>;
