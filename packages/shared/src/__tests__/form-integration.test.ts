@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { loanInputSchema } from '../index';
-import type { LoanInput } from '../index';
 
 /**
  * Phase 2: Form Integration Tests
@@ -16,7 +15,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should provide meaningful error for invalid principal', () => {
       const result = loanInputSchema.safeParse({
         principal: -100,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
       });
 
@@ -31,13 +30,13 @@ describe('Form Integration: Real-time Validation', () => {
     it('should provide meaningful error for invalid interest rate', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: -5,
+        monthlyRate: -5,
         months: 12,
       });
 
       expect(result.success).toBe(false);
       if (!result.success) {
-        const rateError = result.error.flatten().fieldErrors.annualRate;
+        const rateError = result.error.flatten().fieldErrors.monthlyRate;
         expect(rateError).toBeDefined();
         expect(rateError?.[0]).toContain('must be greater than or equal to');
       }
@@ -46,7 +45,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should provide meaningful error for invalid tenure', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 0,
       });
 
@@ -61,7 +60,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should accept form submission with valid data', () => {
       const validData = {
         principal: 100000,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
       };
 
@@ -77,7 +76,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should coerce string principal to number', () => {
       const result = loanInputSchema.safeParse({
         principal: '100000',
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
       });
 
@@ -91,21 +90,21 @@ describe('Form Integration: Real-time Validation', () => {
     it('should coerce string rate to number', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: '10.5',
+        monthlyRate: '10.5',
         months: 12,
       });
 
       expect(result.success).toBe(true);
       if (result.success) {
-        expect(result.data.annualRate).toBe(10.5);
-        expect(typeof result.data.annualRate).toBe('number');
+        expect(result.data.monthlyRate).toBe(10.5);
+        expect(typeof result.data.monthlyRate).toBe('number');
       }
     });
 
     it('should coerce string months to number', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: 10,
+        monthlyRate: 10,
         months: '12',
       });
 
@@ -119,7 +118,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should reject non-numeric string for principal', () => {
       const result = loanInputSchema.safeParse({
         principal: 'abc',
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
       });
 
@@ -129,7 +128,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should reject non-numeric string for rate', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: 'xyz',
+        monthlyRate: 'xyz',
         months: 12,
       });
 
@@ -139,7 +138,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should reject non-numeric string for months', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 'invalid',
       });
 
@@ -151,7 +150,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should validate partial input data', () => {
       const incompleteData = {
         principal: 50000,
-        annualRate: 8,
+        monthlyRate: 8,
       };
 
       // Schema should accept partial data for progressive validation
@@ -164,7 +163,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should accept minimum valid values', () => {
       const minData = {
         principal: 1,
-        annualRate: 0.1,
+        monthlyRate: 0.1,
         months: 1,
       };
 
@@ -175,7 +174,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should accept maximum valid values', () => {
       const maxData = {
         principal: 10000000,
-        annualRate: 100,
+        monthlyRate: 100,
         months: 360,
       };
 
@@ -186,7 +185,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should reject values just outside boundaries', () => {
       const underMin = {
         principal: 0,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
       };
 
@@ -197,7 +196,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should reject values exceeding maximum', () => {
       const overMax = {
         principal: 10000001,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
       };
 
@@ -210,33 +209,33 @@ describe('Form Integration: Real-time Validation', () => {
     it('should accept decimal values for interest rate', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: 10.75,
+        monthlyRate: 10.75,
         months: 12,
       });
 
       expect(result.success).toBe(true);
       if (result.success) {
-        expect(result.data.annualRate).toBe(10.75);
+        expect(result.data.monthlyRate).toBe(10.75);
       }
     });
 
     it('should accept very small decimal rates', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: 0.15,
+        monthlyRate: 0.15,
         months: 12,
       });
 
       expect(result.success).toBe(true);
       if (result.success) {
-        expect(result.data.annualRate).toBe(0.15);
+        expect(result.data.monthlyRate).toBe(0.15);
       }
     });
 
     it('should reject very high decimal precision that exceeds boundaries', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: 100.01,
+        monthlyRate: 100.01,
         months: 12,
       });
 
@@ -246,7 +245,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should handle floating point principal values', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000.50,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
       });
 
@@ -261,7 +260,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should provide clear error message for each field', () => {
       const invalidData = {
         principal: -1000,
-        annualRate: -50,
+        monthlyRate: -50,
         months: -5,
       };
 
@@ -273,12 +272,12 @@ describe('Form Integration: Real-time Validation', () => {
         
         // All three fields should have error messages
         expect(errors.principal).toBeDefined();
-        expect(errors.annualRate).toBeDefined();
+        expect(errors.monthlyRate).toBeDefined();
         expect(errors.months).toBeDefined();
         
         // Error messages should be strings, not empty
         expect(errors.principal?.[0]).toBeTruthy();
-        expect(errors.annualRate?.[0]).toBeTruthy();
+        expect(errors.monthlyRate?.[0]).toBeTruthy();
         expect(errors.months?.[0]).toBeTruthy();
       }
     });
@@ -286,7 +285,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should provide specific error for exceeding maximum principal', () => {
       const result = loanInputSchema.safeParse({
         principal: 50000000,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
       });
 
@@ -300,7 +299,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should provide specific error for exceeding maximum tenure', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 500,
       });
 
@@ -316,7 +315,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should handle null/undefined gracefully', () => {
       const result = loanInputSchema.safeParse({
         principal: undefined,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
       });
 
@@ -326,7 +325,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should reject objects with extra properties', () => {
       const result = loanInputSchema.safeParse({
         principal: 100000,
-        annualRate: 10,
+        monthlyRate: 10,
         months: 12,
         extraField: 'should be ignored or error',
       });
@@ -341,7 +340,7 @@ describe('Form Integration: Real-time Validation', () => {
     it('should preserve numeric precision through validation', () => {
       const preciseData = {
         principal: 123456.789,
-        annualRate: 9.876,
+        monthlyRate: 9.876,
         months: 59,
       };
 
@@ -350,7 +349,7 @@ describe('Form Integration: Real-time Validation', () => {
 
       if (result.success) {
         expect(result.data.principal).toBeCloseTo(123456.789, 3);
-        expect(result.data.annualRate).toBeCloseTo(9.876, 3);
+        expect(result.data.monthlyRate).toBeCloseTo(9.876, 3);
       }
     });
   });

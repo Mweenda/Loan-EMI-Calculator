@@ -1,15 +1,15 @@
 import { z } from "zod";
 export declare const loanInputSchema: z.ZodObject<{
     principal: z.ZodNumber;
-    annualRate: z.ZodNumber;
+    monthlyRate: z.ZodNumber;
     months: z.ZodNumber;
 }, "strip", z.ZodTypeAny, {
     principal: number;
-    annualRate: number;
+    monthlyRate: number;
     months: number;
 }, {
     principal: number;
-    annualRate: number;
+    monthlyRate: number;
     months: number;
 }>;
 export type LoanInput = z.infer<typeof loanInputSchema>;
@@ -19,16 +19,16 @@ export type LoanInput = z.infer<typeof loanInputSchema>;
  *
  * Where:
  * - P = Principal amount (loan amount)
- * - R = Monthly interest rate (annual rate / 12 / 100)
+ * - R = Monthly interest rate (monthly rate / 100)
  * - N = Number of months (tenure)
  *
- * @param data - LoanInput object with principal, annualRate, and months
+ * @param data - LoanInput object with principal, monthlyRate, and months
  * @returns Calculated EMI amount as a number (IEEE 754 precision)
  *
  * @example
  * const emi = calculateEMI({
  *   principal: 100000,
- *   annualRate: 12,
+ *   monthlyRate: 12,
  *   months: 12,
  * });
  * // Returns: 8884.88

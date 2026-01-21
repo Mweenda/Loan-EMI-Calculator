@@ -1,8 +1,5 @@
 import { z } from "zod";
 
-// ============================================================================
-// SCHEMA: Zod Runtime Validation
-// ============================================================================
 export const loanInputSchema = z.object({
   principal: z
     .coerce
@@ -10,11 +7,11 @@ export const loanInputSchema = z.object({
     .min(1, "Principal must be greater than or equal to 1")
     .max(10000000, "Principal must be less than or equal to 10,000,000"),
   
-  annualRate: z
+  monthlyRate: z
     .coerce
     .number()
-    .min(0.1, "Annual rate must be greater than or equal to 0.1")
-    .max(100, "Annual rate must be less than or equal to 100"),
+    .min(0.1, "Monthly rate must be greater than or equal to 0.1")
+    .max(100, "Monthly rate must be less than or equal to 100"),
   
   months: z
     .coerce
@@ -26,40 +23,23 @@ export const loanInputSchema = z.object({
 
 export type LoanInput = z.infer<typeof loanInputSchema>;
 
-// ============================================================================
-// FUNCTION: EMI Calculation Engine
-// ============================================================================
-/**
- * Calculates Equated Monthly Installment (EMI) using the standard formula:
- * EMI = P × R × (1 + R)^N / ((1 + R)^N - 1)
- *
- * Where:
- * - P = Principal amount (loan amount)
- * - R = Monthly interest rate (annual rate / 12 / 100)
- * - N = Number of months (tenure)
- *
- * @param data - LoanInput object with principal, annualRate, and months
- * @returns Calculated EMI amount as a number (IEEE 754 precision)
- *
- * @example
- * const emi = calculateEMI({
- *   principal: 100000,
- *   annualRate: 12,
- *   months: 12,
- * });
- * // Returns: 8884.88
- */
 export const calculateEMI = (data: LoanInput): number => {
-  const { principal, annualRate, months } = data;
+  const { principal, monthlyRate, months } = data;
 
-  // Calculate monthly interest rate (convert percentage to decimal)
-  const monthlyRate = annualRate / (12 * 100);
+  const monthlyDecimalRate = monthlyRate / 100;
 
-  // Calculate (1 + R)^N
-  const raisedToN = Math.pow(1 + monthlyRate, months);
+  // Handle zero-interest safely
+  if (Math.abs(monthlyDecimalRate) < Number.EPSILON) {
+    return principal / months;
+  }
 
-  // Apply EMI formula
-  const emi = (principal * monthlyRate * raisedToN) / (raisedToN - 1);
+  const raisedToN = Math.pow(1 + monthlyDecimalRate, months);
+  const denominator = raisedToN - 1;
+  if (Math.abs(denominator) < Number.EPSILON) {
+    return principal / months;
+  }
 
+  const emi = (principal * monthlyDecimalRate * raisedToN) / denominator;
   return emi;
 };
+

@@ -7,34 +7,34 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should calculate EMI correctly for benchmark case 1: 100k @ 12% for 12 months', () => {
         const input: LoanInput = {
           principal: 100000,
-          annualRate: 12,
+          monthlyRate: 1,
           months: 12,
         };
         const result = calculateEMI(input);
-        // Expected: ₹8,884.88 (EMI = P × R × (1+R)^N / ((1+R)^N - 1))
-        expect(result).toBeCloseTo(8884.88, 2);
+  // Expected: ₹8,884.88 (EMI = P × R × (1+R)^N / ((1+R)^N - 1))
+  expect(result).toBeCloseTo(8884.88, 2);
       });
 
       it('should calculate EMI correctly for benchmark case 2: 500k @ 10% for 60 months', () => {
         const input: LoanInput = {
           principal: 500000,
-          annualRate: 10,
+          monthlyRate: 10 / 12,
           months: 60,
         };
         const result = calculateEMI(input);
-        // Expected: ₹10,623.52 (using standard EMI formula)
-        expect(result).toBeCloseTo(10623.52, 2);
+  // Expected: ₹10,623.52 (using standard EMI formula)
+  expect(result).toBeCloseTo(10623.52, 2);
       });
 
       it('should calculate EMI correctly for benchmark case 3: 50k @ 2% for 24 months', () => {
         const input: LoanInput = {
           principal: 50000,
-          annualRate: 2,
+          monthlyRate: 2 / 12,
           months: 24,
         };
         const result = calculateEMI(input);
-        // Expected: ₹2,127.01 (using standard EMI formula)
-        expect(result).toBeCloseTo(2127.01, 2);
+  // Expected: ₹2,127.01 (using standard EMI formula)
+  expect(result).toBeCloseTo(2127.01, 2);
       });
     });
 
@@ -42,7 +42,7 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should handle minimum principal (₹1)', () => {
         const input: LoanInput = {
           principal: 1,
-          annualRate: 10,
+          monthlyRate: 10 / 12,
           months: 12,
         };
         const result = calculateEMI(input);
@@ -53,17 +53,17 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should handle minimum tenure (1 month)', () => {
         const input: LoanInput = {
           principal: 100000,
-          annualRate: 10,
+          monthlyRate: 10 / 12,
           months: 1,
         };
         const result = calculateEMI(input);
-        expect(result).toBeCloseTo(100833.33, 2); // EMI ≈ principal + interest for 1 month
+  expect(result).toBeCloseTo(100833.33, 2); // EMI ≈ principal + interest for 1 month
       });
 
       it('should handle minimum interest rate (0.1%)', () => {
         const input: LoanInput = {
           principal: 100000,
-          annualRate: 0.1,
+          monthlyRate: 0.1,
           months: 12,
         };
         const result = calculateEMI(input);
@@ -76,7 +76,7 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should handle maximum tenure (360 months = 30 years)', () => {
         const input: LoanInput = {
           principal: 5000000,
-          annualRate: 8,
+          monthlyRate: 8 / 12,
           months: 360,
         };
         const result = calculateEMI(input);
@@ -87,7 +87,7 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should handle maximum principal (₹10,000,000)', () => {
         const input: LoanInput = {
           principal: 10000000,
-          annualRate: 10,
+          monthlyRate: 10 / 12,
           months: 120,
         };
         const result = calculateEMI(input);
@@ -98,7 +98,7 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should handle maximum interest rate (100%)', () => {
         const input: LoanInput = {
           principal: 100000,
-          annualRate: 100,
+          monthlyRate: 100,
           months: 12,
         };
         const result = calculateEMI(input);
@@ -111,7 +111,7 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should maintain precision to 2 decimal places for currency', () => {
         const input: LoanInput = {
           principal: 123456,
-          annualRate: 7.5,
+          monthlyRate: 7.5 / 12,
           months: 84,
         };
         const result = calculateEMI(input);
@@ -124,7 +124,7 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should not return NaN for valid inputs', () => {
         const input: LoanInput = {
           principal: 250000,
-          annualRate: 9.5,
+          monthlyRate: 9.5 / 12,
           months: 180,
         };
         const result = calculateEMI(input);
@@ -134,7 +134,7 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should not return Infinity for valid inputs', () => {
         const input: LoanInput = {
           principal: 500000,
-          annualRate: 12,
+          monthlyRate: 12 / 12,
           months: 60,
         };
         const result = calculateEMI(input);
@@ -146,12 +146,12 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should verify EMI increases with principal (all else equal)', () => {
         const emi1 = calculateEMI({
           principal: 100000,
-          annualRate: 10,
+          monthlyRate: 10 / 12,
           months: 60,
         });
         const emi2 = calculateEMI({
           principal: 200000,
-          annualRate: 10,
+          monthlyRate: 10 / 12,
           months: 60,
         });
         expect(emi2).toBeGreaterThan(emi1);
@@ -160,12 +160,12 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should verify EMI increases with interest rate (all else equal)', () => {
         const emi1 = calculateEMI({
           principal: 100000,
-          annualRate: 5,
+          monthlyRate: 5 / 12,
           months: 60,
         });
         const emi2 = calculateEMI({
           principal: 100000,
-          annualRate: 10,
+          monthlyRate: 10 / 12,
           months: 60,
         });
         expect(emi2).toBeGreaterThan(emi1);
@@ -174,12 +174,12 @@ describe('Feature 1.1: EMI Calculation Engine', () => {
       it('should verify EMI decreases with longer tenure (all else equal)', () => {
         const emi1 = calculateEMI({
           principal: 100000,
-          annualRate: 10,
+          monthlyRate: 10 / 12,
           months: 12,
         });
         const emi2 = calculateEMI({
           principal: 100000,
-          annualRate: 10,
+          monthlyRate: 10 / 12,
           months: 60,
         });
         expect(emi2).toBeLessThan(emi1);

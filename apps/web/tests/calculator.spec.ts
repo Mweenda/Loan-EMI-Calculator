@@ -6,7 +6,7 @@ test('Phase 1: Happy Path - 100k @ 12% for 12 months', async ({ page }) => {
   await expect(page).toHaveTitle('Loan EMI Calculator');
   
   await page.fill('input[id="principal"]', '100000');
-  await page.fill('input[id="annualRate"]', '12');
+  await page.fill('input[id="monthlyRate"]', '1');
   await page.fill('input[id="months"]', '12');
   await page.click('button[type="submit"]');
   
@@ -20,7 +20,7 @@ test('Phase 1: Validation - Reject zero principal', async ({ page }) => {
   await page.goto('http://localhost:5173');
   
   await page.fill('input[id="principal"]', '0');
-  await page.fill('input[id="annualRate"]', '10');
+  await page.fill('input[id="monthlyRate"]', '10');
   await page.fill('input[id="months"]', '12');
   await page.click('button[type="submit"]');
   
@@ -36,13 +36,13 @@ test('Phase 1: Benchmark accuracy verification', async ({ page }) => {
   await page.goto('http://localhost:5173');
   
   await page.fill('input[id="principal"]', '100000');
-  await page.fill('input[id="annualRate"]', '12');
+  await page.fill('input[id="monthlyRate"]', '1');
   await page.fill('input[id="months"]', '12');
   await page.click('button[type="submit"]');
   
   await page.waitForSelector('text=Monthly EMI:');
   const emiText = await page.locator('.results .result-value').first().textContent();
-  const emiValue = parseFloat(emiText?.replace(/[₹,]/g, '') || '0');
+  const emiValue = parseFloat(emiText?.replace(/[K,\s]/g, '') || '0');
   
   expect(Math.abs(emiValue - 8884.88)).toBeLessThan(0.5);
 });
@@ -77,7 +77,7 @@ test('Phase 2 [FAILING]: Show formatted currency in real-time', async ({ page })
   await page.goto('http://localhost:5173');
   
   await page.fill('input[id="principal"]', '1000000');
-  await page.fill('input[id="annualRate"]', '10');
+  await page.fill('input[id="monthlyRate"]', '10');
   await page.fill('input[id="months"]', '60');
   
   // Should show formatted result like "₹20,000.00"
@@ -94,7 +94,7 @@ test('Phase 2 [FAILING]: Live calculation without submit', async ({ page }) => {
   await page.goto('http://localhost:5173');
   
   await page.fill('input[id="principal"]', '200000');
-  await page.fill('input[id="annualRate"]', '8');
+  await page.fill('input[id="monthlyRate"]', '8');
   await page.fill('input[id="months"]', '36');
   
   await page.waitForTimeout(500);
